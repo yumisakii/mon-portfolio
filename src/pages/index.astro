@@ -3,121 +3,196 @@ import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 ---
 
-<Layout title="Jonathan de Vaulchier | Game Programmer">
-  <main class="max-w-4xl mx-auto px-6 py-24 md:py-32">
+<Layout title="Jonathan de Vaulchier | Netrunner">
+  <main class="max-w-5xl mx-auto px-6 py-12 md:py-20">
     
-    <!-- En-tête / Accroche -->
-    <header class="mb-24">
-      <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
-        Salut, je suis <span class="text-emerald-400">Jonathan</span>.
+    <!-- Top HUD Bar repensée et centrée -->
+    <div class="max-w-3xl mx-auto flex flex-col md:flex-row md:justify-center md:gap-16 gap-4 text-xs md:text-sm text-[#ff003c] mb-20 border-b border-[#ff003c]/40 pb-4 uppercase tracking-widest font-bold">
+      <div class="flex items-center gap-3">
+        <div class="w-2 h-2 bg-[#ff003c] animate-pulse shadow-[0_0_8px_#ff003c]"></div>
+        <span>SYS.OP // JONATHAN.DEV</span>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-2 sm:gap-8">
+        <span class="text-[#00f0ff]">> STATUS: READY_FOR_HIRE</span>
+        <span class="text-neutral-600 hidden sm:inline">NET_LINK: ESTABLISHED</span>
+      </div>
+    </div>
+
+    <!-- En-tête -->
+    <header class="mb-32 relative">
+      <div class="inline-block bg-[#FCEE0A] text-black px-3 py-1 text-xs font-bold uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(252,238,10,0.3)] hover:scale-105 transition-transform cursor-default">
+        CLASS: Game Programmer
+      </div>
+      
+      <h1 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter uppercase text-white leading-none">
+        Jonathan <br/>
+        <span class="text-transparent" style="-webkit-text-stroke: 2px #00f0ff;">
+          de Vaulchier
+        </span>
       </h1>
-      <p class="text-xl md:text-2xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
-        Game Programmer basé en France, spécialisé dans les mécaniques de gameplay, la physique et l'architecture système (C++, C#, Unreal Engine 5, Unity). Actuellement disponible pour une opportunité à temps plein.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <a href="mailto:jonathan.devaulchier.dev@gmail.com" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-6 py-3 rounded-lg font-semibold transition-colors">
-          Me contacter
+      
+      <div class="relative pl-6 border-l-4 border-[#FCEE0A] max-w-2xl mb-12 h-24">
+        <!-- Le texte s'écrira ici via le script Typewriter -->
+        <p id="typewriter" class="text-lg md:text-xl text-neutral-400 leading-relaxed font-sans"></p>
+        <span id="cursor" class="inline-block w-3 h-5 bg-[#FCEE0A] animate-pulse"></span>
+      </div>
+
+      <!-- Boutons Interactifs -->
+      <div class="flex flex-wrap gap-5 font-bold uppercase tracking-widest text-sm">
+        <a href="mailto:jonathan.devaulchier.dev@gmail.com" class="relative group bg-[#00f0ff] text-black px-8 py-4 [clip-path:polygon(0_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%)] hover:bg-[#FCEE0A] transition-colors">
+          <span class="scramble-text relative z-10" data-value="INITIER_CONTRAT">INITIER_CONTRAT</span>
         </a>
-        <a href="https://github.com/yumisakii" target="_blank" rel="noopener noreferrer" class="border border-slate-800 hover:border-slate-600 bg-slate-900 px-6 py-3 rounded-lg font-medium transition-colors">
-          GitHub
+        
+        <a href="https://github.com/yumisakii" target="_blank" rel="noopener noreferrer" class="relative group bg-neutral-950 text-[#00f0ff] px-8 py-4 border border-[#00f0ff] [clip-path:polygon(0_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%)] hover:bg-[#00f0ff] hover:text-black transition-colors">
+          <span class="scramble-text" data-value="DATA_GITHUB">DATA_GITHUB</span>
         </a>
       </div>
     </header>
-    <a 
-      href="/CV_Jonathan_de_Vaulchier.pdf" 
-      target="_blank" 
-      class="border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 px-6 py-3 rounded-lg font-medium transition-colors"
-    >
-      Télécharger mon CV (PDF)
-    </a>
 
     <!-- Compétences clés -->
-    <section class="mb-24">
-      <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
-        <span class="text-emerald-400">#</span> Core Competencies
+    <section class="mb-32">
+      <h2 class="text-lg font-bold mb-8 flex items-center gap-3 uppercase tracking-widest text-white border-b border-neutral-800 pb-4">
+        <span class="text-[#ff003c]">SYS.MODULES</span> // Core
       </h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
-          <h3 class="text-lg font-bold text-slate-200 mb-2">Gameplay & Physics Programming</h3>
-          <p class="text-slate-400 text-sm">Développement de contrôleurs de personnages (C++/C#), calculs vectoriels de trajectoire, intégration de moteurs physiques (Chaos Engine) et Game Feel.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-neutral-900/80 p-6 border border-neutral-800 hover:border-[#00f0ff] transition-all hover:translate-x-2 relative group cursor-crosshair">
+          <div class="absolute top-0 right-0 p-2 text-[10px] text-neutral-600 font-bold group-hover:text-[#00f0ff]">MOD.01</div>
+          <h3 class="text-md font-bold text-[#FCEE0A] mb-2 uppercase tracking-wide">Gameplay & Physics</h3>
+          <p class="text-neutral-400 text-sm font-sans">Contrôleurs de personnages (C++/C#), calculs vectoriels, intégration Chaos Engine.</p>
         </div>
-        <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
-          <h3 class="text-lg font-bold text-slate-200 mb-2">Engine Architecture & Memory</h3>
-          <p class="text-slate-400 text-sm">Gestion mémoire bas niveau en C++ (smart pointers, Erase-Remove idiom), conception de boucles de jeu dépendantes du DeltaTime et moteurs 2D sur mesure.</p>
+        <div class="bg-neutral-900/80 p-6 border border-neutral-800 hover:border-[#00f0ff] transition-all hover:translate-x-2 relative group cursor-crosshair">
+          <div class="absolute top-0 right-0 p-2 text-[10px] text-neutral-600 font-bold group-hover:text-[#00f0ff]">MOD.02</div>
+          <h3 class="text-md font-bold text-[#FCEE0A] mb-2 uppercase tracking-wide">Architecture & Memory</h3>
+          <p class="text-neutral-400 text-sm font-sans">Gestion mémoire bas niveau (C++), pattern Erase-Remove, boucles dépendantes du DeltaTime.</p>
         </div>
-        <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
-          <h3 class="text-lg font-bold text-slate-200 mb-2">Systems & Procedural Generation</h3>
-          <p class="text-slate-400 text-sm">Création d'outils (BSP, grilles réactives), architecture Data-Driven pour les systèmes d'armes et IA décisionnelle basée sur l'espérance mathématique (EV).</p>
+        <div class="bg-neutral-900/80 p-6 border border-neutral-800 hover:border-[#00f0ff] transition-all hover:translate-x-2 relative group cursor-crosshair">
+          <div class="absolute top-0 right-0 p-2 text-[10px] text-neutral-600 font-bold group-hover:text-[#00f0ff]">MOD.03</div>
+          <h3 class="text-md font-bold text-[#FCEE0A] mb-2 uppercase tracking-wide">Systèmes Procéduraux</h3>
+          <p class="text-neutral-400 text-sm font-sans">Création d'outils (BSP), architecture Data-Driven pour armes et IA décisionnelle (EV).</p>
         </div>
-        <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
-          <h3 class="text-lg font-bold text-slate-200 mb-2">Technical Leadership & Versioning</h3>
-          <p class="text-slate-400 text-sm">Gestion du versioning sur Git/GitHub en équipe pluridisciplinaire, mentoring technique de développeurs juniors et revue de code.</p>
+        <div class="bg-neutral-900/80 p-6 border border-neutral-800 hover:border-[#00f0ff] transition-all hover:translate-x-2 relative group cursor-crosshair">
+          <div class="absolute top-0 right-0 p-2 text-[10px] text-neutral-600 font-bold group-hover:text-[#00f0ff]">MOD.04</div>
+          <h3 class="text-md font-bold text-[#FCEE0A] mb-2 uppercase tracking-wide">Tech Lead & Versioning</h3>
+          <p class="text-neutral-400 text-sm font-sans">Gestion Git en équipe pluridisciplinaire, mentorat technique, résolution de conflits.</p>
         </div>
-      </div>
-      
-      <!-- Outils et Langages -->
-      <div class="flex flex-wrap gap-3 mt-6">
-        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">C++</span>
-        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">C#</span>
-        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">Unreal Engine 5</span>
-        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">Unity 6</span>
-        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">Blueprints</span>
-        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">SFML</span>
-        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">Git / GitHub</span>
       </div>
     </section>
 
     <!-- Section Projets -->
     <section class="mb-24">
-      <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
-        <span class="text-emerald-400">#</span> Projets En Vedette
+      <h2 class="text-lg font-bold mb-8 flex items-center gap-3 uppercase tracking-widest text-white border-b border-neutral-800 pb-4">
+        <span class="text-[#00f0ff]">DATA_ARCHIVES</span> // Projets
       </h2>
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-2 gap-8">
         
         <ProjectCard 
           title="Rising Gear"
-          description="FPS platformer développé en 1 mois (équipe de 12). Programmation C++ sous Unreal Engine d'un grappin physique basé sur des projections vectorielles (MOVE_Flying), inertie et gestion du coyote time."
-          tags={['Unreal Engine', 'C++', 'Physics Math', 'Lead Tech']}
+          description="FPS platformer développé en 1 mois (équipe de 12). Programmation C++ sous Unreal Engine d'un grappin physique basé sur des projections vectorielles, inertie et coyote time."
+          tags={['Unreal Engine', 'C++', 'Physics Math']}
           github="https://github.com/yumisakii/Rising_Gears"
+        />
+
+                <ProjectCard 
+          title="Legend of Gevievre"
+          description="Survivor-like 2D. Conception d'un framework d'armes Data-Driven modulaire à 3 niveaux. Gestion des machines d'états du joueur et mentorat technique."
+          tags={['Unity', 'C#', 'Data-Driven']}
+          github="https://github.com/yumisakii/LegendOfGevievre"
+          media={[
+            '/projects/Genievre_Gameplay.mp4',
+            '/projects/Genievre_1.png',
+            '/projects/Genievre_2.png',
+            '/projects/Genievre_3.png'
+            
+          ]}
+        />
+
+                <ProjectCard 
+          title="Easy Way Out"
+          description="Simulateur de roulette russe au tour par tour. Développement d'une IA calculant l'Espérance Mathématique (EV) pour 5 personnalités et architecture polymorphe."
+          tags={['Unity', 'C#', 'AI Probability']}
+          github="https://github.com/MagnierHugo/EasyWayOut"
+          media={[
+            '/projects/Easy_Way_Out_1.png',
+            '/projects/Easy_Way_Out_2.png',
+            '/projects/Easy_Way_Out_3.png'
+          ]}
         />
 
         <ProjectCard 
           title="Space Rebellion"
-          description="Shoot 'em up 2D développé from scratch en C++ (SFML). Implémentation du moteur custom, gestion mémoire sécurisée (Erase-Remove idiom, shared_ptr), boucle de tir et gestion indépendante du framerate."
-          tags={['C++', 'SFML', 'Custom Engine', 'Memory Management']}
+          description="Shoot 'em up 2D développé from scratch en C++ (SFML). Implémentation du moteur custom, gestion mémoire sécurisée (Erase-Remove idiom), et gestion indépendante du framerate."
+          tags={['C++', 'SFML', 'Custom Engine']}
           github="https://github.com/yumisakii/Space-Rebellion"
+          media={[
+            '/projects/Space_Rebellion_Gameplay.mp4',
+            '/projects/Space_Rebellion_1.png',
+            '/projects/Space_Rebellion_2.png'
+          ]}
         />
 
         <ProjectCard 
-          title="Easy Way Out"
-          description="Simulateur de roulette russe au tour par tour (Game Jam 42h). Développement d'une IA calculant l'Espérance Mathématique (EV) pour 5 personnalités et architecture polymorphe pour les armes."
-          tags={['Unity', 'C#', 'AI Probability', 'State Machine']}
-          github="https://github.com/MagnierHugo/EasyWayOut"
-        />
-
-        <ProjectCard 
-          title="Procedural Dungeon Generator"
-          description="Outil de génération de donjons 3D sous Unity. Utilisation de l'algorithme BSP (Binary Space Partitioning), système de murs réactifs selon la grille adjacente, génération par seed et UI temps réel."
-          tags={['Unity', 'C#', 'Algorithms (BSP)', 'Tooling']}
-          github="https://github.com/yumisakii"
-        />
-
-        <ProjectCard 
-          title="Physics-Based Tower Defense"
-          description="Prototype UE5 résolvant le conflit Spline vs Physique. Utilisation de forces/vélocités calculées plutôt que du positionnement direct, permettant au moteur Chaos d'éjecter physiquement les ennemis."
-          tags={['Unreal Engine 5', 'Chaos Physics', 'Blueprints']}
+          title="Tower Defense"
+          description="Prototype UE5 résolvant le conflit Spline vs Physique. Utilisation de forces/vélocités calculées, permettant au moteur Chaos d'éjecter physiquement les ennemis."
+          tags={['Unreal Engine 5', 'Chaos Physics']}
           github="https://github.com/yumisakii/TowerDefense"
+          Tower_Defense.png
+          media={[
+            '/projects/Tower_Defense.png'
+          ]}
         />
 
         <ProjectCard 
-          title="Legend of Gevievre"
-          description="Survivor-like 2D (Game Jam 42h). Conception d'un framework d'armes Data-Driven modulaire à 3 niveaux. Gestion des machines d'états du joueur et rôle de mentorat auprès d'étudiants juniors."
-          tags={['Unity', 'C#', 'Data-Driven Architecture', 'Leadership']}
-          github="https://github.com/yumisakii/LegendOfGevievre"
+          title="Dungeon Generator"
+          description="Outil de génération de donjons 3D sous Unity. Utilisation de l'algorithme BSP, système de murs réactifs selon la grille adjacente et génération par seed."
+          tags={['Unity', 'C#', 'Algorithms (BSP)']}
+          github="https://github.com/yumisakii/Procedural-Dungeon"
         />
 
       </div>
     </section>
-
   </main>
+
+  <script>
+    const textToType = "Spécialisé dans les mécaniques de gameplay, la physique et l'architecture système. Je conçois des logiques complexes sous Unreal Engine 5 & Unity. Actuellement disponible.";
+    const typingElement = document.getElementById("typewriter");
+    let charIndex = 0;
+
+    function typeWriter() {
+      if (typingElement && charIndex < textToType.length) {
+        typingElement.innerHTML += textToType.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 20); 
+      } else {
+        const cursor = document.getElementById("cursor");
+        if (cursor) {
+          cursor.classList.add("hidden"); 
+        }
+      }
+    }
+    
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+    
+    document.querySelectorAll('.scramble-text').forEach(el => {
+      el.addEventListener('mouseover', event => {
+        let iterations = 0;
+        const target = event.target as HTMLElement;
+        const originalText = target.dataset.value || ""; 
+        
+        if (!originalText) return; 
+
+        const interval = setInterval(() => {
+          target.innerText = originalText.split("")
+            .map((letter, index) => {
+              if(index < iterations) return originalText[index];
+              return letters[Math.floor(Math.random() * letters.length)]
+            }).join("");
+          
+          if(iterations >= originalText.length) clearInterval(interval);
+          iterations += 1 / 2; 
+        }, 30);
+      });
+    });
+
+    window.addEventListener('load', typeWriter);
+  </script>
 </Layout>

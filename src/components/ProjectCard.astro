@@ -5,34 +5,137 @@ interface Props {
   tags: string[];
   link?: string;
   github?: string;
+  media?: string[];
 }
 
-const { title, description, tags, link, github, image } = Astro.props;
+const { title, description, tags, link, github, media = [] } = Astro.props;
+const cardId = title.toLowerCase().replace(/\s+/g, '-');
 ---
-<article class="bg-slate-900/50 flex flex-col justify-between rounded-2xl border border-slate-800 hover:border-emerald-500/50 transition-all overflow-hidden group">
-  {image && (
-    <div class="h-48 overflow-hidden bg-slate-950 relative">
-      <img 
-        src={image} 
-        alt={title} 
-        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" 
-      />
+
+<article class="relative bg-neutral-900/50 flex flex-col justify-between group hover:bg-neutral-900 transition-colors border border-neutral-800 hover:border-[#00f0ff] [clip-path:polygon(0_0,100%_0,100%_calc(100%-20px),calc(100%-20px)_100%,0_100%)] overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(0,240,255,0.1)]">
+  
+  <div class="p-6 flex-grow relative flex flex-col">
+    <!-- Data Block -->
+    <div class="absolute top-3 right-3 flex gap-1.5 opacity-30 group-hover:opacity-100 transition-opacity" title="Module Data Actif">
+      <div class="w-1.5 h-1.5 bg-[#FCEE0A]"></div>
+      <div class="w-1.5 h-1.5 bg-[#FCEE0A]"></div>
+      <div class="w-1.5 h-1.5 bg-transparent border border-[#FCEE0A]"></div>
     </div>
-  )}
-  <div class="p-6 flex-1 flex flex-col justify-between">
-    <div>
-      <h3 class="text-xl font-bold mb-3 group-hover:text-emerald-400 transition-colors">{title}</h3>
-      <p class="text-slate-400 mb-6 text-sm leading-relaxed">{description}</p>
-      <div class="flex flex-wrap gap-2 text-xs font-mono text-emerald-300/70 mb-6">
-        {tags.map((tag) => (
-          <span class="bg-emerald-500/10 px-2 py-1 rounded">{tag}</span>
+
+    <!-- En-tête + Texte -->
+    <div class="relative z-10">
+      <h3 class="text-2xl font-black mb-4 text-white uppercase tracking-widest glitch-hover cursor-crosshair w-fit pr-8">{title}</h3>
+      <p class="text-neutral-400 mb-6 text-sm leading-relaxed font-sans">{description}</p>
+      
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 text-[10px] font-mono text-[#00f0ff] uppercase font-bold mb-4">
+        {tags.map((tag: string) => (
+          <span class="bg-[#00f0ff]/10 border border-[#00f0ff]/30 px-2 py-1">{tag}</span>
         ))}
       </div>
     </div>
-    
-    <div class="flex gap-4 text-sm font-medium pt-4 border-t border-slate-800/50">
-      {link && <a href={link} target="_blank" rel="noopener noreferrer" class="text-slate-200 hover:text-emerald-400 transition-colors">Démo ↗</a>}
-      {github && <a href={github} target="_blank" rel="noopener noreferrer" class="text-slate-200 hover:text-emerald-400 transition-colors">Code source ↗</a>}
+
+    <!-- ZONE MÉDIA À LA DEMANDE (Ancrée en haut avec mt-2 au lieu de mt-auto) -->
+    {media.length > 0 && (
+      <div class="relative z-10 mt-2">
+        <!-- Bouton Toggle HUD -->
+        <button 
+          data-target={`feed-${cardId}`}
+          class="feed-toggle-btn w-full py-2 px-3 bg-black/60 border border-neutral-800 hover:border-[#FCEE0A] text-[#FCEE0A] text-xs font-mono font-bold flex justify-between items-center transition-colors uppercase tracking-wider mb-2"
+        >
+          <span>[ > VISUAL_FEED ({media.length}) ]</span>
+          <span class="text-[10px] text-neutral-500 toggle-state">SHOW</span>
+        </button>
+
+        <!-- Lecteur multi-caméras caché par défaut -->
+        <div id={`feed-${cardId}`} class="hidden space-y-2">
+          {media.length > 1 && (
+            <div class="flex gap-2">
+              {media.map((_, index) => (
+                <button 
+                  data-card={cardId}
+                  data-index={index}
+                  class="cam-tab-btn px-2 py-1 bg-neutral-950 border border-neutral-800 text-[10px] text-neutral-400 hover:text-[#00f0ff] uppercase font-mono font-bold border-active:border-[#00f0ff]"
+                >
+                  CAM_0{index + 1}
+                </button>
+              ))}
+            </div>
+          )}
+
+          <!-- Conteneur d'affichage (Ratio 16:9 dynamique) -->
+          <div class="relative w-full aspect-video border border-neutral-800 bg-black overflow-hidden group-hover:border-[#00f0ff]/40">
+            <!-- Overlay cyan -->
+            <div class="absolute inset-0 bg-[#00f0ff]/20 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500 pointer-events-none z-10"></div>
+            
+            {media.map((file, index) => (
+              <div class={`media-item media-${cardId}-${index} ${index === 0 ? 'block' : 'hidden'} w-full h-full`}>
+                {file.endsWith('.mp4') || file.endsWith('.webm') ? (
+                  <video src={file} autoplay loop muted playsinline class="w-full h-full object-contain opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-500"></video>
+                ) : (
+                  <img src={file} alt={`${title} screenshot`} class="w-full h-full object-contain opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-500" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Ligne de scan -->
+    <div class="absolute top-0 left-0 w-full bg-[#00f0ff] shadow-[0_0_10px_#00f0ff] h-[2px] transition-all duration-700 ease-out opacity-0 group-hover:opacity-100 group-hover:top-[calc(100%-2px)] pointer-events-none z-0"></div>
+  </div>
+  
+  <!-- Footer de la carte -->
+  <div class="p-6 pt-4 border-t border-neutral-800 relative z-10 bg-neutral-900/50 group-hover:bg-neutral-950 transition-colors">
+    <div class="flex gap-6 text-sm font-bold uppercase tracking-wider">
+      {link && <a href={link} target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#FCEE0A] transition-colors flex items-center gap-2">> Run_Demo</a>}
+      {github && <a href={github} target="_blank" rel="noopener noreferrer" class="text-neutral-500 hover:text-white transition-colors flex items-center gap-2">> Source_Code</a>}
     </div>
   </div>
+
 </article>
+
+<script>
+  document.querySelectorAll('.feed-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      if (!targetId) return;
+      const feed = document.getElementById(targetId);
+      const stateLabel = btn.querySelector('.toggle-state');
+      
+      if (feed && stateLabel) {
+        const isHidden = feed.classList.contains('hidden');
+        if (isHidden) {
+          feed.classList.remove('hidden');
+          stateLabel.textContent = 'HIDE';
+          btn.classList.add('border-[#00f0ff]', 'text-[#00f0ff]');
+        } else {
+          feed.classList.add('hidden');
+          stateLabel.textContent = 'SHOW';
+          btn.classList.remove('border-[#00f0ff]', 'text-[#00f0ff]');
+        }
+      }
+    });
+  });
+
+  document.querySelectorAll('.cam-tab-btn').forEach(tabBtn => {
+    tabBtn.addEventListener('click', () => {
+      const cardId = tabBtn.getAttribute('data-card');
+      const targetIndex = tabBtn.getAttribute('data-index');
+      
+      if (!cardId || targetIndex === null) return;
+
+      document.querySelectorAll(`[class*="media-${cardId}-"]`).forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('block');
+      });
+
+      const activeMedia = document.querySelector(`.media-${cardId}-${targetIndex}`);
+      if (activeMedia) {
+        activeMedia.classList.remove('hidden');
+        activeMedia.classList.add('block');
+      }
+    });
+  });
+</script>
