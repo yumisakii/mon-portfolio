@@ -1,0 +1,15 @@
+---
+import '../styles/global.css';
+
+const { title } = Astro.props;
+---
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-slate-950 text-slate-200 font-sans antialiased selection:bg-emerald-500 selection:text-white">
+    <slot />
+  </body>
+</html>

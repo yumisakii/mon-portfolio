@@ -1,16 +1,123 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Jonathan de Vaulchier | Game Programmer">
+  <main class="max-w-4xl mx-auto px-6 py-24 md:py-32">
+    
+    <!-- En-tête / Accroche -->
+    <header class="mb-24">
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
+        Salut, je suis <span class="text-emerald-400">Jonathan</span>.
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
+        Game Programmer basé en France, spécialisé dans les mécaniques de gameplay, la physique et l'architecture système (C++, C#, Unreal Engine 5, Unity). Actuellement disponible pour une opportunité à temps plein.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="mailto:jonathan.devaulchier.dev@gmail.com" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-6 py-3 rounded-lg font-semibold transition-colors">
+          Me contacter
+        </a>
+        <a href="https://github.com/yumisakii" target="_blank" rel="noopener noreferrer" class="border border-slate-800 hover:border-slate-600 bg-slate-900 px-6 py-3 rounded-lg font-medium transition-colors">
+          GitHub
+        </a>
+      </div>
+    </header>
+    <a 
+      href="/CV_Jonathan_de_Vaulchier.pdf" 
+      target="_blank" 
+      class="border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 px-6 py-3 rounded-lg font-medium transition-colors"
+    >
+      Télécharger mon CV (PDF)
+    </a>
+
+    <!-- Compétences clés -->
+    <section class="mb-24">
+      <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+        <span class="text-emerald-400">#</span> Core Competencies
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+          <h3 class="text-lg font-bold text-slate-200 mb-2">Gameplay & Physics Programming</h3>
+          <p class="text-slate-400 text-sm">Développement de contrôleurs de personnages (C++/C#), calculs vectoriels de trajectoire, intégration de moteurs physiques (Chaos Engine) et Game Feel.</p>
+        </div>
+        <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+          <h3 class="text-lg font-bold text-slate-200 mb-2">Engine Architecture & Memory</h3>
+          <p class="text-slate-400 text-sm">Gestion mémoire bas niveau en C++ (smart pointers, Erase-Remove idiom), conception de boucles de jeu dépendantes du DeltaTime et moteurs 2D sur mesure.</p>
+        </div>
+        <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+          <h3 class="text-lg font-bold text-slate-200 mb-2">Systems & Procedural Generation</h3>
+          <p class="text-slate-400 text-sm">Création d'outils (BSP, grilles réactives), architecture Data-Driven pour les systèmes d'armes et IA décisionnelle basée sur l'espérance mathématique (EV).</p>
+        </div>
+        <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+          <h3 class="text-lg font-bold text-slate-200 mb-2">Technical Leadership & Versioning</h3>
+          <p class="text-slate-400 text-sm">Gestion du versioning sur Git/GitHub en équipe pluridisciplinaire, mentoring technique de développeurs juniors et revue de code.</p>
+        </div>
+      </div>
+      
+      <!-- Outils et Langages -->
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">C++</span>
+        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">C#</span>
+        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">Unreal Engine 5</span>
+        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">Unity 6</span>
+        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">Blueprints</span>
+        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">SFML</span>
+        <span class="bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium border border-emerald-500/20">Git / GitHub</span>
+      </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section class="mb-24">
+      <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+        <span class="text-emerald-400">#</span> Projets En Vedette
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        
+        <ProjectCard 
+          title="Rising Gear"
+          description="FPS platformer développé en 1 mois (équipe de 12). Programmation C++ sous Unreal Engine d'un grappin physique basé sur des projections vectorielles (MOVE_Flying), inertie et gestion du coyote time."
+          tags={['Unreal Engine', 'C++', 'Physics Math', 'Lead Tech']}
+          github="https://github.com/yumisakii/Rising_Gears"
+        />
+
+        <ProjectCard 
+          title="Space Rebellion"
+          description="Shoot 'em up 2D développé from scratch en C++ (SFML). Implémentation du moteur custom, gestion mémoire sécurisée (Erase-Remove idiom, shared_ptr), boucle de tir et gestion indépendante du framerate."
+          tags={['C++', 'SFML', 'Custom Engine', 'Memory Management']}
+          github="https://github.com/yumisakii/Space-Rebellion"
+        />
+
+        <ProjectCard 
+          title="Easy Way Out"
+          description="Simulateur de roulette russe au tour par tour (Game Jam 42h). Développement d'une IA calculant l'Espérance Mathématique (EV) pour 5 personnalités et architecture polymorphe pour les armes."
+          tags={['Unity', 'C#', 'AI Probability', 'State Machine']}
+          github="https://github.com/MagnierHugo/EasyWayOut"
+        />
+
+        <ProjectCard 
+          title="Procedural Dungeon Generator"
+          description="Outil de génération de donjons 3D sous Unity. Utilisation de l'algorithme BSP (Binary Space Partitioning), système de murs réactifs selon la grille adjacente, génération par seed et UI temps réel."
+          tags={['Unity', 'C#', 'Algorithms (BSP)', 'Tooling']}
+          github="https://github.com/yumisakii"
+        />
+
+        <ProjectCard 
+          title="Physics-Based Tower Defense"
+          description="Prototype UE5 résolvant le conflit Spline vs Physique. Utilisation de forces/vélocités calculées plutôt que du positionnement direct, permettant au moteur Chaos d'éjecter physiquement les ennemis."
+          tags={['Unreal Engine 5', 'Chaos Physics', 'Blueprints']}
+          github="https://github.com/yumisakii/TowerDefense"
+        />
+
+        <ProjectCard 
+          title="Legend of Gevievre"
+          description="Survivor-like 2D (Game Jam 42h). Conception d'un framework d'armes Data-Driven modulaire à 3 niveaux. Gestion des machines d'états du joueur et rôle de mentorat auprès d'étudiants juniors."
+          tags={['Unity', 'C#', 'Data-Driven Architecture', 'Leadership']}
+          github="https://github.com/yumisakii/LegendOfGevievre"
+        />
+
+      </div>
+    </section>
+
+  </main>
+</Layout>
